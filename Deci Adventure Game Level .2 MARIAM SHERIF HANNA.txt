@@ -1,0 +1,78 @@
+import time
+import random
+
+def clear_screen():
+  """Clears the console screen."""
+  print("\n" * 50)
+
+def pause():
+  """Pauses the game for a short time."""
+  time.sleep(0)
+
+def intro():
+  """Displays the game introduction."""
+  print("You wake up on a deserted island. The sun is beating down, and you're hungry and thirsty. You don't remember how you got here. To survive, you must explore the island, find food and water, and eventually find a way to escape.")
+  pause()
+
+def explore():
+  """Allows the player to explore the island."""
+  global total_score
+  print("You decide to explore the island.")
+  location = random.choice(["beach", "jungle", "cave"])
+  if location == "beach":
+    print("You find a coconut tree! You quench your thirst and gain 10 points.")
+    total_score += 10
+  elif location == "jungle":
+    print("You encounter a wild boar! You manage to scare it away but lose 5 points.")
+    total_score -= 5
+  else:
+    print("You discover a hidden cave! You find a map and gain 20 points.")
+    total_score += 20
+  pause()
+
+def check_inventory():
+  """Displays the player's inventory."""
+  print("Your inventory is empty.")  # Add inventory functionality later
+  pause()
+
+def check_score():
+  """Displays the player's score."""
+  print(f"Your score is: {total_score}")
+  pause()
+
+def game_over():
+  """Ends the game."""
+  print("Game over!")
+  play_again = input("Do you want to play again? (yes/no): ").lower()
+  if play_again == "yes":
+    start_game()
+  else:
+    print("Thanks for playing!")
+
+def start_game():
+  """Starts the game."""
+  global total_score
+  total_score = 0
+  intro()
+  while True:
+    clear_screen()
+    print("What do you want to do?")
+    print("1. Explore")
+    print("2. Check inventory")
+    print("3. Check score")
+    print("4. Quit")
+    choice = input("> ")
+    if choice == "1":
+      explore()
+    elif choice == "2":
+      check_inventory()
+    elif choice == "3":
+      check_score()
+    elif choice == "4":
+      game_over()
+      break
+    else:
+      print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+  start_game()
